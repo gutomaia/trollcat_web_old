@@ -56,7 +56,7 @@ if($_POST) {
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Test</title>
+<title>Trollcat</title>
 <link type="text/css" rel="stylesheet" href="style.css" media="screen" />
 </head>
 <body>
@@ -88,7 +88,7 @@ if($_POST) {
 	
 	<div class="row">
 		<div class="column grid_12 footer">
-			<p>&copy;2011 All rights trolled. Longcat is long.</p>
+			<p>&copy;2011 All rights trolled. Trollcat is loonger and annoying.</p>
 		</div>
 	</div>
 </body>
