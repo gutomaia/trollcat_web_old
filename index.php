@@ -10,6 +10,7 @@
  * @link https://github.com/abraham/twitteroauth
  */
 require('lib/twitteroauth/twitteroauth.php');
+require('lib/recaptcha/recaptchalib.php');
 require('config.php');
 
 /** 
@@ -39,14 +40,15 @@ function troll($messages, $cats) {
  * Form POST processing
  */
 if($_POST) {
-	
-	$messages = filter_var_array($_POST['messages'], FILTER_SANITIZE_STRING);
-
-	if(sizeof($messages) == 5) {
-		try {
-			troll($messages, $cats);
-		} catch (Exception $e) {
-			echo $e->getMessage();
+	$resp = recaptcha_check_answer(RECAPTCHA_PRIVATE, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
+	if ($resp->is_valid){
+		$messages = filter_var_array($_POST['messages'], FILTER_SANITIZE_STRING);
+		if(sizeof($messages) == 5) {
+			try {
+				troll($messages, $cats);
+			} catch (Exception $e) {
+				echo $e->getMessage();
+			}
 		}
 	}
 }
@@ -84,6 +86,7 @@ if($_POST) {
 					<p><label>Message:</label> <input type="text" name="messages[]" /></p>
 				</div>
 				<p><input type="button" value="Add" onclick="javascript:addMessage()" /></p>
+				<?php echo recaptcha_get_html(RECAPTCHA_PUBLIC); ?>
 				<p><input type="submit" value="Meow!"></p>
 			</form>
 		</div>
