@@ -55,9 +55,19 @@ if($_POST) {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Trollcat</title>
-<link type="text/css" rel="stylesheet" href="style.css" media="screen" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Trollcat</title>
+	<link type="text/css" rel="stylesheet" href="style.css" media="screen" />
+	<script>
+	function addMessage() {
+		var fields = document.getElementById("fields");
+		if (fields.childElementCount <= 10){ 
+			var template = document.createElement('p');
+			template.innerHTML = "<label>Message:</label> <input type=\"text\" name=\"messages[]\" />";
+			fields.appendChild(template);
+		}
+	}
+	</script>
 </head>
 <body>
 
@@ -72,11 +82,8 @@ if($_POST) {
 				<div id="fields">
 					<p><label>Message:</label> <input type="text" name="messages[]" /></p>
 					<p><label>Message:</label> <input type="text" name="messages[]" /></p>
-					<p><label>Message:</label> <input type="text" name="messages[]" /></p>
-					<p><label>Message:</label> <input type="text" name="messages[]" /></p>
-					<p><label>Message:</label> <input type="text" name="messages[]" /></p>
 				</div>
-				
+				<p><input type="button" value="Add" onclick="javascript:addMessage()" /></p>
 				<p><input type="submit" value="Meow!"></p>
 			</form>
 		</div>
